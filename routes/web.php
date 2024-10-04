@@ -14,11 +14,11 @@ Route::get('/', function () {
 
 Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
-})->middleware(['auth', 'verified','rolemanager:admin'])->name('admin');
+})->middleware(['auth', 'verified', 'rolemanager:admin'])->name('admin');
 
 Route::get('/customer/dashboard', function () {
     return view('customer.dashboard');
-})->middleware(['auth', 'verified','rolemanager:customer'])->name('customer');
+})->middleware(['auth', 'verified', 'rolemanager:customer'])->name('customer');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -19,7 +19,7 @@
 
             <div class="mt-4">
                 <x-input-label for="role" :value="__('Pilih Peran')" />
-                <select name="role" id="role" class="block mt-1 w-full" @change="roleChange">
+                <select name="role" id="role" class="block mt-1 w-full">
                     <option value="0">Admin</option>
                     <option value="1">Customer</option>
                 </select>
@@ -33,20 +33,20 @@
             </div> -->
 
             <!-- Address -->
-            <div class="mt-4" v-show="seen">
+            <div class="mt-4" id="seen1">
                 <x-input-label for="address" :value="__('Alamat')" />
                 <textarea name="address" id="address" class="block mt-1 w-full" autofocus></textarea>
             </div>
 
             <!-- Phone -->
-            <div class="mt-4" v-show="seen">
+            <div class="mt-4" id="seen2">
                 <x-input-label for="phone" :value="__('Nomor Telepon')" />
                 <x-text-input id="phone" class="block mt-1 w-full" type="text" name="phone" autofocus/>
                 <x-input-error :messages="$errors->get('phone')" class="mt-2" />
             </div>
 
             <!-- Sim Number -->
-            <div class="mt-4" v-show="seen">
+            <div class="mt-4" id="seen3">
                 <x-input-label for="sim_number" :value="__('Nomor SIM')" />
                 <x-text-input id="sim_number" class="block mt-1 w-full" type="text" name="sim_number" autofocus/>
                 <x-input-error :messages="$errors->get('sim_number')" class="mt-2" />
