@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\MenuController;
+use App\Http\Controllers\CarController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -24,6 +24,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/admin/cars', [CarController::class, 'index'])->name('admin.cars');
+    Route::get('/admin/cars/add', [CarController::class, 'add'])->name('admin.cars.add');
+    Route::post('/admin/cars/save', [CarController::class, 'save'])->name('admin.cars.save');
+    Route::get('/admin/cars/edit/{id}', [CarController::class, 'edit'])->name('admin.cars.edit');
+    Route::put('/admin/cars/edit/{id}', [CarController::class, 'update'])->name('admin.cars.update');
+    Route::get('/admin/cars/delete/{id}', [CarController::class, 'delete'])->name('admin.cars.delete');
 });
 
 require __DIR__.'/auth.php';
