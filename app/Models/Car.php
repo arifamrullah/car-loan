@@ -14,6 +14,10 @@ class Car extends Model
         'type',
         'plate_number',
         'rent_price',
-        'qty'
+        'is_available'
     ];
+
+    public function rent(){
+        return $this->hasMany(Rent::class);
+    }
 }

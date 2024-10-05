@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('brand');
             $table->string('type');
-            $table->string('plate_number');
-            $table->integer('rent_price');
-            $table->integer('qty');
+            $table->string('plate_number')->unique();
+            $table->unsignedBigInteger('rent_price');
+            $table->boolean('is_available');
             $table->timestamps();
         });
     }

@@ -52,10 +52,11 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col">
-                                <input type="text" name="qty" class="form-control" placeholder="Stok">
-                                @error('qty')
-                                <span class="text-danger">{{$message}}</span>
-                                @enderror
+                                <label for="is_available" class=form-label>Ketersediaan</label>
+                                <select name="is_available" id="is_available" class="form-control">
+                                    <option value="true">Tersedia</option>
+                                    <option value="false">Tidak Tersedia</option>
+                                </select>
                             </div>
                         </div>
                         <div class="row">

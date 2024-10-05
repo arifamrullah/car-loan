@@ -13,6 +13,12 @@ class CarController extends Controller
         return view('admin.car.index', compact(['cars', 'total']));
     }
 
+    public function custIndex() {
+        $cars = Car::orderBy('brand', 'asc')->get();
+        $total = Car::count();
+        return view('customer.car.index', compact(['cars', 'total']));
+    }
+
     public function add() {
         return view('admin.car.add');
     }
@@ -23,7 +29,7 @@ class CarController extends Controller
             'type' => 'required',
             'plate_number' => 'required',
             'rent_price' => 'required',
-            'qty' => 'required'
+            'is_available' => 'required'
         ]);
 
         $data = Car::create($validation);
@@ -47,9 +53,8 @@ class CarController extends Controller
         $cars->type = $request->type;
         $cars->plate_number = $request->plate_number;
         $cars->rent_price = $request->rent_price;
-        $cars->qty = $request->qty;
+        $cars->is_available = $request->is_available;
         
-        // $menus->price = $price;
         $data = $cars->save();
         if($data) {
             session()->flash('success', 'Mobil Berhasil Diedit');
@@ -69,5 +74,10 @@ class CarController extends Controller
             session()->flash('error', 'Mobil Tidak Berhasil Dihapus');
             return redirect(route('admin.cars'));
         }
+    }
+
+    public function rentCar($id) {
+        $cars = Car::findOrFail($id);
+        return view('customer.car.rent', compact('cars'));
     }
 }

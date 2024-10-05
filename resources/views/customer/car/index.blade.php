@@ -11,7 +11,6 @@
                 <div class="p-6 text-gray-900">
                     <div class="d-flex align-items-center justify-content-between">
                         <h1 class="mb-0">Daftar Mobil</h1>
-                        <a href="{{ route('admin.cars.add') }}" class="btn btn-primary">Tambah Mobil</a>
                     </div>
                     <hr />
                     @if(Session::has('success'))
@@ -48,8 +47,7 @@
                                 </td>
                                 <td class="align-middle">
                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                        <a href="{{ route('admin.cars.edit', ['id'=>$car->id]) }}" type="button" class="btn btn-secondary">Edit</a>
-                                        <a href="{{ route('admin.cars.delete', ['id'=>$car->id]) }}" type="button" class="btn btn-danger">Delete</a>
+                                        <a href="{{ route('customer.cars.rent', ['id'=>$car->id]) }}" type="button" class="btn btn-primary">Sewa</a>
                                     </div>
                                 </td>
                             </tr>

@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\RentCarController;
+use App\Http\Controllers\ReturnCarController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -31,6 +33,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/cars/edit/{id}', [CarController::class, 'edit'])->name('admin.cars.edit');
     Route::put('/admin/cars/edit/{id}', [CarController::class, 'update'])->name('admin.cars.update');
     Route::get('/admin/cars/delete/{id}', [CarController::class, 'delete'])->name('admin.cars.delete');
+
+    Route::get('/customer/cars', [CarController::class, 'custIndex'])->name('customer.cars');
+    Route::get('/customer/cars/rent/{id}', [CarController::class, 'rentCar'])->name('customer.cars.rent');
+    
+    Route::get('/customer/rents', [RentCarController::class, 'index'])->name('customer.rents');
+    Route::post('/customer/rents/save', [RentCarController::class, 'save'])->name('customer.rents.save');
+    
+    Route::get('/customer/returns', [ReturnCarController::class, 'index'])->name('customer.returns');
+    Route::get('/customer/cars/returns/', [ReturnCarController::class, 'carReturn'])->name('customer.cars.return');
+    Route::post('/customer/cars/returns/', [RentCarController::class, 'findByPlate'])->name('customer.cars.find');
+    Route::post('/customer/returns/save', [ReturnCarController::class, 'save'])->name('customer.returns.save');
 });
 
 require __DIR__.'/auth.php';

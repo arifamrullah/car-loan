@@ -14,18 +14,6 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
-        <script>
-            $(document).ready(function(){
-                $('#seen1,#seen2,#seen3').hide();
-                $('#role').on('change', function(){
-                    if($(this).val() == 0) {
-                        $('#seen1,#seen2,#seen3').hide();
-                    }else{
-                        $('#seen1,#seen2,#seen3').show();
-                    }
-                })
-            })
-        </script>
     </head>
     <body class="font-sans text-gray-900 antialiased">
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">

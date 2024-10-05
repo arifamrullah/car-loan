@@ -15,6 +15,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
