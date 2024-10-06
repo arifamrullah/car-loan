@@ -48,8 +48,12 @@ class RentCarController extends Controller
     }
 
     public function findByPlate(Request $request) {
+        $user_id = Auth::user()->id;
         $car = Car::wherePlateNumber($request->plate_number)->firstOrFail();
-        $rent_car = RentCar::whereCarId($car->id)->firstOrFail();
+        $car_id = $car->id;
+        $rent_car = RentCar::whereUserId($user_id)
+                           ->whereCarId($car_id)
+                           ->firstOrFail();
 
         return view('customer.return-car.add', compact('rent_car'));
     }
