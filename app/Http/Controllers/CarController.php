@@ -9,7 +9,7 @@ class CarController extends Controller
 {
     public function index() {
         $cars = Car::orderBy('brand', 'asc')->get();
-        $total = Car::count();
+        $total = Car::count();        
         return view('admin.car.index', compact(['cars', 'total']));
     }
 
@@ -17,6 +17,69 @@ class CarController extends Controller
         $cars = Car::orderBy('brand', 'asc')->get();
         $total = Car::count();
         return view('customer.car.index', compact(['cars', 'total']));
+    }
+
+    public function search(Request $request) {
+        $brand = $request->brand;
+        $type = $request->type;
+        $is_available = $request->is_available;
+
+        if($brand) {
+            if($type) {
+                if($is_available) {
+                    $cars = Car::whereLike('brand',"%$brand%")
+                               ->whereLike('type',"%$type%")
+                               ->whereLike('is_available',"%$is_available%")->get();
+                } else {
+                    $cars = Car::whereLike('brand',"%$brand%")
+                               ->whereLike('type',"%$type%")->get();
+                }
+            } elseif($is_available) {
+                $cars = Car::whereLike('brand',"%$brand%")
+                           ->whereLike('is_available',"%$is_available%")->get();
+            } else {
+                $cars = Car::whereLike('brand',"%$brand%")->get();
+            }
+        }
+
+        if($type) {
+            if($brand) {
+                if($is_available) {
+                    $cars = Car::whereLike('brand',"%$brand%")
+                               ->whereLike('type',"%$type%")
+                               ->whereLike('is_available',"%$is_available%")->get();
+                } else {
+                    $cars = Car::whereLike('brand',"%$brand%")
+                               ->whereLike('type',"%$type%")->get();
+                }
+            } elseif($is_available) {
+                $cars = Car::whereLike('type',"%$type%")
+                            ->whereLike('is_available',"%$is_available%")->get();
+            } else {
+                $cars = Car::whereLike('type',"%$type%")->get();
+            }
+        }
+
+        if($is_available) {
+            if($brand) {
+                if($type) {
+                    $cars = Car::whereLike('brand',"%$brand%")
+                               ->whereLike('type',"%$type%")
+                               ->whereLike('is_available',"%$is_available%")->get();
+                } else {
+                    $cars = Car::whereLike('brand',"%$brand%")
+                               ->whereLike('is_available',"%$is_available%")->get();
+                }
+            } elseif($type) {
+                $cars = Car::whereLike('type',"%$type%")
+                            ->whereLike('is_available',"%$is_available%")->get();
+            } else {
+                $cars = Car::whereLike('is_available',"%$is_available%")->get();
+            }
+        }
+
+        $total = count($cars);
+        return view('admin.car.index', compact(['cars', 'total']));
     }
 
     public function add() {

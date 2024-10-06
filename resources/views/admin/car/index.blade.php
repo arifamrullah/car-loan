@@ -14,6 +14,31 @@
                         <a href="{{ route('admin.cars.add') }}" class="btn btn-primary">Tambah Mobil</a>
                     </div>
                     <hr />
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h4 class="mb-0">Cari Mobil Berdasarkan</h4>
+                        <form action="{{ route('admin.cars.search') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <input type="text" name="brand" placeholder="Merek Mobil" value="{{ Request()->brand ? Request()->brand : '' }}">
+                            @error('brand')
+                            <span class="text-danger">{{$message}}</span>
+                            @enderror
+
+                            <input type="text" name="type" placeholder="Model Mobil" value="{{ Request()->type ? Request()->type : '' }}">
+                            @error('type')
+                            <span class="text-danger">{{$message}}</span>
+                            @enderror
+
+                            <select name="is_available" id="is_available">
+                                <option value="" disabled selected hidden>-- Ketersediaan --</option>
+                                <option value="true" {{ Request()->is_available == 'true' ? 'selected' : '' }}>Tersedia</option>
+                                <option value="false" {{ Request()->is_available == 'false' ? 'selected' : '' }}>Tidak Tersedia</option>
+                            </select>
+
+                            <button class="btn btn-primary">Cari Mobil</button>
+                            <a href="{{ route('admin.cars') }}" class="btn btn-danger">Reset</a>
+                        </form>
+                    </div>
+                    <hr />
                     @if(Session::has('success'))
                     <div class="alert alert-success" role="alert">
                         {{ Session::get('success') }}
