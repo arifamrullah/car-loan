@@ -9,12 +9,12 @@ class CarController extends Controller
 {
     public function index() {
         $cars = Car::orderBy('brand', 'asc')->get();
-        $total = Car::count();        
+        $total = Car::count();
         return view('admin.car.index', compact(['cars', 'total']));
     }
 
     public function custIndex() {
-        $cars = Car::orderBy('brand', 'asc')->get();
+        $cars = Car::whereIsAvailable('true')->orderBy('brand', 'asc')->get();
         $total = Car::count();
         return view('customer.car.index', compact(['cars', 'total']));
     }

@@ -11,6 +11,12 @@ class ReturnCarController extends Controller
     public function index() {
         $return_cars = ReturnCar::orderBy('id', 'asc')->get();
         $total = ReturnCar::count();
+        return view('admin.return-car.index', compact(['return_cars', 'total']));
+    }
+
+    public function custIndex() {
+        $return_cars = ReturnCar::orderBy('id', 'asc')->get();
+        $total = ReturnCar::count();
         return view('customer.return-car.index', compact(['return_cars', 'total']));
     }
 

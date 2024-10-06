@@ -35,13 +35,16 @@ Route::middleware('auth')->group(function () {
     Route::put('/admin/cars/edit/{id}', [CarController::class, 'update'])->name('admin.cars.update');
     Route::get('/admin/cars/delete/{id}', [CarController::class, 'delete'])->name('admin.cars.delete');
 
+    Route::get('/admin/rents', [RentCarController::class, 'index'])->name('admin.rents');
+    Route::get('/admin/returns', [ReturnCarController::class, 'index'])->name('admin.returns');
+
     Route::get('/customer/cars', [CarController::class, 'custIndex'])->name('customer.cars');
     Route::get('/customer/cars/rent/{id}', [CarController::class, 'rentCar'])->name('customer.cars.rent');
     
-    Route::get('/customer/rents', [RentCarController::class, 'index'])->name('customer.rents');
+    Route::get('/customer/rents', [RentCarController::class, 'custIndex'])->name('customer.rents');
     Route::post('/customer/rents/save', [RentCarController::class, 'save'])->name('customer.rents.save');
     
-    Route::get('/customer/returns', [ReturnCarController::class, 'index'])->name('customer.returns');
+    Route::get('/customer/returns', [ReturnCarController::class, 'custIndex'])->name('customer.returns');
     Route::get('/customer/cars/returns/', [ReturnCarController::class, 'carReturn'])->name('customer.cars.return');
     Route::post('/customer/cars/returns/', [RentCarController::class, 'findByPlate'])->name('customer.cars.find');
     Route::post('/customer/returns/save', [ReturnCarController::class, 'save'])->name('customer.returns.save');

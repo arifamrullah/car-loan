@@ -11,7 +11,13 @@ class RentCarController extends Controller
     public function index() {
         $rent_cars = RentCar::orderBy('start_date', 'asc')->get();
         $total = RentCar::count();
-        return view('customer.rent-car.add', compact(['rent_cars', 'total']));
+        return view('admin.rent-car.index', compact(['rent_cars', 'total']));
+    }
+    
+    public function custIndex() {
+        $rent_cars = RentCar::orderBy('start_date', 'asc')->get();
+        $total = RentCar::count();
+        return view('customer.rent-car.index', compact(['rent_cars', 'total']));
     }
 
     public function save(Request $request) {
