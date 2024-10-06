@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\RentCar;
 use App\Models\Car;
+use Illuminate\Support\Facades\Auth;
 
 class RentCarController extends Controller
 {
@@ -15,7 +16,8 @@ class RentCarController extends Controller
     }
     
     public function custIndex() {
-        $rent_cars = RentCar::orderBy('start_date', 'asc')->get();
+        $user_id = Auth::user()->id;
+        $rent_cars = RentCar::whereUserId($user_id)->orderBy('start_date', 'asc')->get();
         $total = RentCar::count();
         return view('customer.rent-car.index', compact(['rent_cars', 'total']));
     }
@@ -47,8 +49,8 @@ class RentCarController extends Controller
 
     public function findByPlate(Request $request) {
         $car = Car::wherePlateNumber($request->plate_number)->firstOrFail();
-        $rent = RentCar::whereCarId($car->id)->firstOrFail();
+        $rent_car = RentCar::whereCarId($car->id)->firstOrFail();
 
-        return view('customer.return-car.index', compact('rent'));
+        return view('customer.return-car.add', compact('rent_car'));
     }
 }

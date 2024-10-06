@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ReturnCar;
 use App\Models\Car;
+use Illuminate\Support\Facades\Auth;
 
 class ReturnCarController extends Controller
 {
@@ -15,7 +16,8 @@ class ReturnCarController extends Controller
     }
 
     public function custIndex() {
-        $return_cars = ReturnCar::orderBy('id', 'asc')->get();
+        $user_id = Auth::user()->id;
+        $return_cars = ReturnCar::whereUserId($user_id)->orderBy('id', 'asc')->get();
         $total = ReturnCar::count();
         return view('customer.return-car.index', compact(['return_cars', 'total']));
     }
@@ -32,7 +34,7 @@ class ReturnCarController extends Controller
             'total_price' => 'required',
             'car_id' => 'required',
             'user_id' => 'required',
-            'rent_cars_id' => 'required'
+            'rent_car_id' => 'required'
         ]);
 
         $car = Car::findOrFail($request->car_id);

@@ -7,7 +7,7 @@
                     var $end_date = $("input[name='end_date']").val();
                     var $diff = new Date($end_date) - new Date($("input[name='start_date']").val());
                     var $days = $diff/1000/60/60/24 + 1;
-                    var $total_price = {{ $rent->car->rent_price }} * $days;
+                    var $total_price = {{ $rent_car->car->rent_price }} * $days;
                     
                     $("input[name='total_price']").val($total_price);
                     $("input[name='days']").val($days);
@@ -35,18 +35,18 @@
                     @endif
                     <form action="{{ route('customer.returns.save') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        <input type="hidden" name="car_id" value="{{$rent->car->id}}">
-                        <input type="hidden" name="user_id" value="{{$rent->user->id}}">
-                        <input type="hidden" name="rent_cars_id" value="{{$rent->id}}">
+                        <input type="hidden" name="car_id" value="{{$rent_car->car->id}}">
+                        <input type="hidden" name="user_id" value="{{$rent_car->user->id}}">
+                        <input type="hidden" name="rent_car_id" value="{{$rent_car->id}}">
                         <div class="row mb-3">
                             <div class="col">
-                                Nama Penyewa : {{ $rent->user->name }}
+                                Nama Penyewa : {{ $rent_car->user->name }}
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col">
                                 <label class="form-label">Tanggal Sewa</label>
-                                <input type="date" name="start_date" value="{{ $rent->start_date }}" class="form-control" readonly>
+                                <input type="date" name="start_date" value="{{ $rent_car->start_date }}" class="form-control" readonly>
                                 @error('start_date')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
@@ -55,7 +55,7 @@
                         <div class="row mb-3">
                             <div class="col">
                                 <label class="form-label">Tanggal Akhir Sewa</label>
-                                <input type="date" name="end_date" value="{{ $rent->end_date }}" class="form-control">
+                                <input type="date" name="end_date" value="{{ $rent_car->end_date }}" class="form-control">
                                 @error('end_date')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
@@ -64,7 +64,7 @@
                         <div class="row mb-3">
                             <div class="col">
                                 <label class="form-label">Harga Sewa per Hari</label>
-                                <input type="text" name="rent_price" value="{{ $rent->car->rent_price }}" class="form-control" placeholder="0" readonly>
+                                <input type="text" name="rent_price" value="{{ $rent_car->car->rent_price }}" class="form-control" placeholder="0" readonly>
                                 @error('rent_price')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
@@ -73,7 +73,7 @@
                         <div class="row mb-3">
                             <div class="col">
                                 <label class="form-label">Jumlah Hari Penyewaan</label>
-                                <input type="text" name="days" class="form-control" value="{{ $rent->days }}" readonly>
+                                <input type="text" name="days" class="form-control" value="{{ $rent_car->days }}" readonly>
                                 @error('days')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
@@ -82,7 +82,7 @@
                         <div class="row mb-3">
                             <div class="col">
                                 <label class="form-label">Jumlah Biaya Sewa</label>
-                                <input type="text" name="total_price" class="form-control" value="{{ $rent->est_price }}" readonly>
+                                <input type="text" name="total_price" class="form-control" value="{{ $rent_car->est_price }}" readonly>
                                 @error('total_price')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror

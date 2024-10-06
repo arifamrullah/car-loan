@@ -69,6 +69,11 @@
                                         &#9989;
                                     @else
                                         &#10060;
+                                        <br>
+                                        @forelse ($car->rentCar as $rent)
+                                            Tersedia pada tanggal {{ date("d-m-Y" ,strtotime("+1 day", strtotime($rent->end_date))) }}
+                                        @empty
+                                        @endforelse
                                     @endif
                                 </td>
                                 <td class="align-middle">

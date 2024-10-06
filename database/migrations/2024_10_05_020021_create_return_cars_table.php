@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('total_price');
             $table->foreignId('car_id')->constrained()->cascadeOnDelete();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('rent_cars_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('rent_car_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

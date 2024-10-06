@@ -16,7 +16,7 @@ class ReturnCar extends Model
         'total_price',
         'car_id',
         'user_id',
-        'rent_cars_id'
+        'rent_car_id'
     ];
 
     public function car() {

@@ -17,7 +17,7 @@ class Car extends Model
         'is_available'
     ];
 
-    public function rent(){
-        return $this->hasMany(Rent::class);
+    public function rentCar(){
+        return $this->hasMany(RentCar::class);
     }
 }

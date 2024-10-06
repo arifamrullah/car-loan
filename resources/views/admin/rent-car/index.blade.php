@@ -29,6 +29,7 @@
                                 <th>Tanggal Kembali</th>
                                 <th>Jumlah Hari Penyewaan</th>
                                 <th>Estimasi Harga</th>
+                                <th>Sudah Kembali</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -41,10 +42,17 @@
                                 <td class="align-middle">{{ $rent_car->end_date }}</td>
                                 <td class="align-middle">{{ $rent_car->days }}</td>
                                 <td class="align-middle">Rp{{ number_format($rent_car->est_price,0,',','.') }}</td>
+                                <td class="align-middle">
+                                    @if($rent_car->returnCar)
+                                        &#9989;
+                                    @else
+                                        &#10060;
+                                    @endif
+                                </td>
                             </tr>
                             @empty
                             <tr>
-                                <td class="text-center" colspan="7">Mobil Tidak Ada</td>
+                                <td class="text-center" colspan="8">Mobil Tidak Ada</td>
                             </tr>
                             @endforelse
                         </tbody>
